@@ -1,11 +1,22 @@
+import { existsSync } from "fs";
+import path from "path";
 import { ObjectId, type Document, type WithId } from "mongodb";
+import { imageUrl, slugify } from "./post-shared";
 import { getDb } from "./mongodb";
 import { TEAM_GROUPS, type TeamGroup, type TeamMember } from "./team-shared";
 
 export * from "./team-shared";
 
+/** Photo saved in public/images/team/<name-slug>.jpg (e.g. moses-mwale.jpg). */
+function staticPhoto(name: string): string | null {
+  const file = `${slugify(name)}.jpg`;
+  return existsSync(path.join(process.cwd(), "public", "images", "team", file)) ? `/images/team/${file}` : null;
+}
+
 export function toMember(d: WithId<Document>): TeamMember {
+  const photo = d.photo ? String(d.photo) : null;
   return {
+    photoUrl: photo ? imageUrl(photo) : staticPhoto(d.name ?? ""),
     id: d._id.toString(),
     name: d.name ?? "",
     role: d.role ?? "",
@@ -76,7 +87,7 @@ export async function getTeam(opts: { includeHidden?: boolean } = {}): Promise<T
   }
 }
 
-export type MemberInput = Omit<TeamMember, "id" | "order">;
+export type MemberInput = Omit<TeamMember, "id" | "order" | "photoUrl">;
 
 export function validateMember(b: Record<string, unknown>):
   | { ok: true; data: MemberInput }

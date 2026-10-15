@@ -10,12 +10,11 @@ export const metadata = { title: "Dashboard" };
 export default async function Dashboard() {
   const s = await requireAdmin();
   const db = await getDb();
-  const [published, drafts, newMsgs, totalMsgs, subs, recentPosts, recentMsgs] = await Promise.all([
+  const [published, drafts, newMsgs, totalMsgs, recentPosts, recentMsgs] = await Promise.all([
     db.collection("posts").countDocuments({ status: "published" }),
     db.collection("posts").countDocuments({ status: "draft" }),
     db.collection("contact_messages").countDocuments({ status: "new" }),
     db.collection("contact_messages").countDocuments(),
-    db.collection("subscribers").countDocuments(),
     db.collection("posts").find().sort({ updatedAt: -1 }).limit(5).toArray(),
     db.collection("contact_messages").find().sort({ createdAt: -1 }).limit(5).toArray(),
   ]);
@@ -24,7 +23,6 @@ export default async function Dashboard() {
     { label: "Published posts", value: published, href: "/admin/posts?status=published" },
     { label: "Drafts", value: drafts, href: "/admin/posts?status=draft" },
     { label: "New messages", value: newMsgs, sub: `${totalMsgs} total`, href: "/admin/messages?status=new" },
-    { label: "Subscribers", value: subs, href: "/admin/subscribers" },
   ];
 
   return (
@@ -32,7 +30,7 @@ export default async function Dashboard() {
       <AdminHeader title={`Welcome, ${s.name.split(" ")[0]}`} subtitle="Here's what's happening on the Royal Flow website."
         actions={<Link href="/admin/posts/new" className="btn btn-gold">+ New post</Link>} />
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
         {cards.map((c) => (
           <Link key={c.label} href={c.href} className="rounded-2xl border border-cream-200 bg-white p-5 shadow-sm transition hover:border-gold-500">
             <p className="text-sm text-navy-700/75">{c.label}</p>

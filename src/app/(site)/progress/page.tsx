@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GoalsGrid, Pathway } from "@/components/growth";
+import Photo from "@/components/Photo";
 import { CtaBand, PageHero, SectionTitle } from "@/components/ui";
-import { CURRENT_STAGE } from "@/lib/content";
+import { CURRENT_STAGE, PILOT_DESIGN } from "@/lib/content";
 import { getSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default async function ProgressPage() {
             <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">{CURRENT_STAGE.label}</h2>
             <p className="mt-4 text-lg text-navy-700/90">{CURRENT_STAGE.summary}</p>
             <p className="mt-3 text-sm text-navy-700/70">{CURRENT_STAGE.note}</p>
+            <Photo name="site-visit" alt="The Royal Flow team speaking with a community member during a site visit" caption="Community site visit" className="mt-8" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {VALIDATING.map((v) => (
@@ -52,6 +54,26 @@ export default async function ProgressPage() {
         <div className="mt-16">
           <h2 className="mb-6 font-display text-2xl font-bold">Where we are on the pathway</h2>
           <Pathway />
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+          <div>
+            <SectionTitle eyebrow="Pilot design" title="How each pilot site works" />
+            <div className="mt-8 space-y-5">
+              {PILOT_DESIGN.map((p) => (
+                <div key={p.title} className="flex gap-4">
+                  <span aria-hidden="true" className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-gold-500" />
+                  <div>
+                    <h3 className="font-display text-lg font-semibold">{p.title}</h3>
+                    <p className="mt-1 text-navy-700/85">{p.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Photo name="community-engagement" alt="The Royal Flow team reviewing plans with community members" caption="Community engagement" />
         </div>
       </section>
 

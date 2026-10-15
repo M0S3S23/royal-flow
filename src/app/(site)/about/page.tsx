@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Photo from "@/components/Photo";
+import Recognition from "@/components/Recognition";
+import { INSTITUTIONAL_PARTNER } from "@/lib/content";
 import TeamGrid from "@/components/TeamGrid";
 import { getTeam } from "@/lib/team";
 import { CtaBand, PageHero, SectionTitle } from "@/components/ui";
@@ -36,8 +39,12 @@ export default async function AboutPage() {
           <SectionTitle eyebrow="Who we are" title="Reliable, affordable power from low-head rivers" />
           <p className="mt-6 text-lg leading-relaxed text-navy-700/90">
             Conventional hydropower depends on large dams and major civil works. Royal Flow Energy takes a different approach:
-            the <strong>Riverbox</strong>, a compact micro-hydro turbine designed for low-head streams of roughly 1–5 metres,
+            the <strong>Riverbox</strong>, a compact micro-hydro turbine designed for low-head streams of roughly 1–10 metres,
             that can be installed and maintained by local teams.
+          </p>
+          <p className="mt-4 text-lg leading-relaxed text-navy-700/90">
+            Riverbox began as a final-year engineering initiative at the {INSTITUTIONAL_PARTNER.name}, our institutional partner
+            through the {INSTITUTIONAL_PARTNER.detail}. It directly supports Zambia&apos;s Rural Electrification Master Plan (REMP 2.0).
           </p>
           <p className="mt-4 text-lg leading-relaxed text-navy-700/90">
             We have moved beyond the concept stage. The Riverbox prototype has been developed, and we are now completing integration,
@@ -49,15 +56,20 @@ export default async function AboutPage() {
             projects from resource assessment through fabrication, installation and commissioning — in Zambia and across Southern Africa.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="space-y-6">
+          <Photo name="team-at-work" alt="The Royal Flow Energy team on a community site visit" caption="Community site visit, April 2026" />
+          <div className="grid gap-4 sm:grid-cols-2">
           {VALUES.map((v) => (
             <div key={v.title} className="rounded-2xl border border-cream-200 bg-white p-6 shadow-sm">
               <h3 className="font-display text-lg font-semibold">{v.title}</h3>
               <p className="mt-2 text-sm text-navy-700/85">{v.text}</p>
             </div>
           ))}
+          </div>
         </div>
       </section>
+
+      <Recognition />
 
       <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">

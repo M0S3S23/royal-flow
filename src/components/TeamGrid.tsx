@@ -1,12 +1,11 @@
-import { imageUrl } from "@/lib/post-shared";
 import { initials, TEAM_GROUPS, type TeamMember } from "@/lib/team-shared";
 
 function MemberCard({ m, compact = false }: { m: TeamMember; compact?: boolean }) {
   return (
     <article className="flex flex-col items-center rounded-2xl border border-cream-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      {m.photo ? (
+      {m.photoUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={imageUrl(m.photo)} alt={m.name} loading="lazy" className={`${compact ? "h-24 w-24" : "h-32 w-32"} rounded-full object-cover ring-4 ring-gold-500/30`} />
+        <img src={m.photoUrl} alt={m.name} loading="lazy" className={`${compact ? "h-24 w-24" : "h-32 w-32"} rounded-full object-cover ring-4 ring-gold-500/30`} />
       ) : (
         <div aria-hidden="true" className={`flex ${compact ? "h-24 w-24 text-3xl" : "h-32 w-32 text-4xl"} items-center justify-center rounded-full bg-navy-800 font-display font-bold text-gold-400 ring-4 ring-gold-500/30`}>
           {initials(m.name)}

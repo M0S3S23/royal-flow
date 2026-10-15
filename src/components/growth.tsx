@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { CAPITAL_USES, GOALS, INVEST_HREF, PATHWAY, REVENUE_STREAMS } from "@/lib/content";
 import { formatUsd, type SiteSettings } from "@/lib/settings";
-import NotifyForm from "./NotifyForm";
 
 /** Growth pathway with the current stage highlighted. */
 export function Pathway({ dark = false }: { dark?: boolean }) {
@@ -68,7 +67,7 @@ export function CapitalUses() {
 export function GoalsGrid({ only }: { only?: string[] }) {
   const goals = only ? GOALS.filter((g) => only.includes(g.key)) : GOALS;
   return (
-    <div className={`grid gap-6 ${goals.length > 2 ? "md:grid-cols-2" : "md:grid-cols-2"}`}>
+    <div className={`grid gap-6 ${goals.length > 1 ? "md:grid-cols-2" : ""}`}>
       {goals.map((g) => (
         <section key={g.key} className="rounded-2xl border border-cream-200 bg-white p-7 shadow-sm">
           <div className="h-1 w-10 rounded bg-gold-500" />
@@ -124,9 +123,12 @@ export function SupportAndInvest({ s, headingLevel = "h2" }: { s: SiteSettings; 
                 Support Riverbox · opening soon
               </button>
               <p className="mt-3 text-sm text-navy-900/80">
-                Our verified Royal Flow Energy payment link is being set up. Leave your email and we&apos;ll let you know when it opens.
+                Our verified Royal Flow Energy payment link is being set up.{" "}
+                <Link href={`/contact?topic=${encodeURIComponent("Supporting Riverbox")}`} className="font-semibold underline underline-offset-2">
+                  Contact us
+                </Link>{" "}
+                if you would like to support Riverbox in the meantime.
               </p>
-              <div className="mt-3 max-w-md"><NotifyForm /></div>
             </>
           )}
         </div>

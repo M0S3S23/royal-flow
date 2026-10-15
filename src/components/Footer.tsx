@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { getSettings } from "@/lib/settings";
 import { NAV } from "./nav";
-import NewsletterForm from "./NewsletterForm";
 
 export default async function Footer() {
   const s = await getSettings();
@@ -15,7 +14,7 @@ export default async function Footer() {
 
   return (
     <footer className="bg-navy-950 text-cream-100/80">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div className="lg:col-span-1">
           <div className="flex items-center gap-3">
             <Image src="/logo.png" alt="Royal Flow Energy logo" width={64} height={64} className="h-16 w-16" />
@@ -56,11 +55,6 @@ export default async function Footer() {
           )}
         </div>
 
-        <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-gold-400">Stay updated</h3>
-          <p className="mt-4 mb-3 text-sm">Pilot progress, field results and news — a few emails a year.</p>
-          <NewsletterForm />
-        </div>
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs sm:flex-row sm:px-6">

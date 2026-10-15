@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CapitalUses, FundingChannels, SupportAndInvest } from "@/components/growth";
+import Photo from "@/components/Photo";
 import { PageHero, SectionTitle } from "@/components/ui";
 import { getSettings } from "@/lib/settings";
 
@@ -30,7 +31,10 @@ export default async function SupportPage() {
 
       <section className="bg-cream-50 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <SectionTitle eyebrow="Where support goes" title="Building capacity for commercial deployment" />
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <SectionTitle eyebrow="Where support goes" title="Building capacity for commercial deployment" />
+            <Photo name="community" alt="A rural community in Zambia" />
+          </div>
           <div className="mt-10"><CapitalUses /></div>
         </div>
       </section>

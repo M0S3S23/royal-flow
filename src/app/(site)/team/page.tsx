@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import TeamGrid from "@/components/TeamGrid";
 import { CtaBand, PageHero, SectionTitle } from "@/components/ui";
-import { INVEST_HREF, PARTNER_TYPES } from "@/lib/content";
+import { INSTITUTIONAL_PARTNER, INVEST_HREF, PARTNER_TYPES } from "@/lib/content";
 import { getSettings } from "@/lib/settings";
 import { getTeam } from "@/lib/team";
 
@@ -32,6 +32,15 @@ export default async function TeamPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <SectionTitle eyebrow="Partners" title="Working together to scale Riverbox"
             intro="Deploying Riverbox in 20+ rural communities depends on strong partnerships. We work with — and are looking for — organisations across the energy and development sector." />
+          <a href={INSTITUTIONAL_PARTNER.url} target="_blank" rel="noopener noreferrer"
+            className="mt-10 flex max-w-xl items-center gap-5 rounded-2xl bg-white p-6 ring-1 ring-cream-200 transition hover:ring-gold-500">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-navy-800 font-display text-sm font-bold text-gold-400">UNZA</span>
+            <span>
+              <span className="block text-xs font-semibold uppercase tracking-widest text-gold-600">Institutional partner</span>
+              <span className="mt-1 block font-display text-lg font-semibold">{INSTITUTIONAL_PARTNER.name}</span>
+              <span className="block text-sm text-navy-700/80">{INSTITUTIONAL_PARTNER.detail}</span>
+            </span>
+          </a>
           {s.partners.length > 0 && (
             <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {s.partners.map((p) => (

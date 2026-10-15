@@ -34,7 +34,7 @@ export interface SiteSettings {
 
 export const DEFAULT_SETTINGS: SiteSettings = {
   stats: [
-    { value: "1–5 m", label: "Low-head water sources" },
+    { value: "1–10 m", label: "Low-head water sources" },
     { value: "US$70k", label: "Scale-up capital target" },
     { value: "20+", label: "Rural communities targeted" },
     { value: "100+", label: "Installations — long-term goal" },

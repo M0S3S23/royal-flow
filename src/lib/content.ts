@@ -105,3 +105,47 @@ export const PARTNER_TYPES = [
 /** Contact-form topic used by every "Invest / Partner with us" button. */
 export const INVEST_TOPIC = "Investment / partnership";
 export const INVEST_HREF = `/contact?topic=${encodeURIComponent(INVEST_TOPIC)}`;
+
+/* ---------- From the Royal Spark Pilot Project technical summary ---------- */
+
+export const TECH_SPECS: [string, string][] = [
+  ["Turbine type", "Atmospheric crossflow (Banki-Michell), radial multi-blade runner"],
+  ["Design net head", "1.0 – 10.0 metres"],
+  ["Design flow rate", "≥ 50 litres per second"],
+  ["Rotational speed", "300 RPM (nominal runner speed)"],
+  ["Mechanical efficiency", "79% (CFD-validated)"],
+  ["Power output", "Prototype: 6.8 kW mechanical · Pilot targets: 5–10 kW electrical"],
+];
+
+export const INNOVATIONS = [
+  {
+    title: "100% import substitution",
+    text: "Built in standard Zambian mechanical workshops from locally available steel grades and off-the-shelf transmission components, instead of imported generators and specialised runners.",
+  },
+  {
+    title: "Low-head optimisation",
+    text: "A wide, multi-blade runner extracts energy from high-volume, low-head rivers with drops down to 1 metre, minimising expensive civil works and dams.",
+  },
+  {
+    title: "Baseload power, 24/7",
+    text: "Continuous generation with no heavy battery storage (as with solar mini-grids) and no fuel logistics (as with diesel generators).",
+  },
+];
+
+export const PILOT_DESIGN = [
+  { title: "Site infrastructure", text: "Small diversion weir, local penstock piping, a turbine house and a basic mini-grid distribution line to target clusters." },
+  { title: "Anchor loads first", text: "Priority for rural health posts, schools and milling equipment to raise capacity factor and stimulate local economic activity." },
+  { title: "Community ownership", text: "Ownership transitions to a village cooperative, with a modest monthly household tariff paid into a ring-fenced maintenance fund." },
+];
+
+export const RECOGNITION = {
+  award: "Jury Choice Award for Energy Impact",
+  event: "Global Sustainability Challenge finals — Munich, April 2026",
+  note: "Recognised by experts from Stanford University, TUM and Imperial College London.",
+};
+
+export const INSTITUTIONAL_PARTNER = {
+  name: "University of Zambia (UNZA)",
+  detail: "Department of Mechanical Engineering",
+  url: "https://www.unza.zm",
+};

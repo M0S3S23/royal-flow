@@ -17,7 +17,9 @@ export interface TeamMember {
   role: string; // job title, e.g. "IT & Software Lead"
   group: TeamGroup; // section on the Team page
   bio: string;
-  photo: string | null; // GridFS image id
+  photo: string | null; // GridFS image id (uploaded in admin)
+  /** URL to show: uploaded photo, else public/images/team/<name-slug>.jpg if present, else null (initials). */
+  photoUrl: string | null;
   email: string;
   linkedin: string;
   order: number;

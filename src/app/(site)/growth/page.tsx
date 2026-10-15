@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CapitalTarget, CapitalUses, GoalsGrid, Pathway, RevenueStreams, SupportAndInvest } from "@/components/growth";
+import Photo from "@/components/Photo";
 import { PageHero, SectionTitle } from "@/components/ui";
 import { SCALE_UP_INTRO } from "@/lib/content";
 import { getSettings } from "@/lib/settings";
@@ -36,6 +37,7 @@ export default async function GrowthPage() {
           <div className="space-y-6">
             <SectionTitle eyebrow="Investment" title="Scale-up capital" intro={SCALE_UP_INTRO} />
             <CapitalTarget s={s} />
+            <Photo name="crossflow-drawing" alt="Riverbox crossflow turbine assembly drawing" caption="Designed for fabrication in local Zambian workshops" />
           </div>
           <div>
             <h3 className="mb-4 font-display text-xl font-semibold">What the capital supports</h3>

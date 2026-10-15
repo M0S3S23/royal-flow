@@ -6,7 +6,7 @@ import { imageUrl } from "@/lib/post-shared";
 import { initials, TEAM_GROUPS, type TeamGroup, type TeamMember } from "@/lib/team-shared";
 import { DeleteButton } from "./controls";
 
-type Draft = Omit<TeamMember, "id" | "order">;
+type Draft = Omit<TeamMember, "id" | "order" | "photoUrl">;
 const EMPTY: Draft = { name: "", role: "", group: "Leadership", bio: "", photo: null, email: "", linkedin: "", visible: true };
 const PHOTO_SIZE = 600;
 
@@ -22,10 +22,11 @@ async function squarePhoto(file: File): Promise<Blob> {
   return new Promise((res, rej) => canvas.toBlob((b) => (b ? res(b) : rej(new Error("Could not process photo."))), "image/jpeg", 0.88));
 }
 
-export function Avatar({ m, size = 56 }: { m: Pick<TeamMember, "name" | "photo">; size?: number }) {
-  return m.photo ? (
+export function Avatar({ m, size = 56 }: { m: Pick<TeamMember, "name" | "photo"> & { photoUrl?: string | null }; size?: number }) {
+  const src = m.photo ? imageUrl(m.photo) : m.photoUrl;
+  return src ? (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={imageUrl(m.photo)} alt="" width={size} height={size} className="shrink-0 rounded-full object-cover ring-2 ring-gold-500/40" style={{ width: size, height: size }} />
+    <img src={src} alt="" width={size} height={size} className="shrink-0 rounded-full object-cover ring-2 ring-gold-500/40" style={{ width: size, height: size }} />
   ) : (
     <span className="flex shrink-0 items-center justify-center rounded-full bg-navy-800 font-display font-bold text-gold-400" style={{ width: size, height: size, fontSize: size * 0.36 }}>
       {initials(m.name) || "?"}
@@ -33,7 +34,7 @@ export function Avatar({ m, size = 56 }: { m: Pick<TeamMember, "name" | "photo">
   );
 }
 
-function MemberForm({ initial, id, onDone }: { initial: Draft; id?: string; onDone: () => void }) {
+function MemberForm({ initial, id, fallbackUrl, onDone }: { initial: Draft; id?: string; fallbackUrl?: string | null; onDone: () => void }) {
   const router = useRouter();
   const [d, setD] = useState<Draft>(initial);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -88,7 +89,7 @@ function MemberForm({ initial, id, onDone }: { initial: Draft; id?: string; onDo
   return (
     <form onSubmit={save} className="grid gap-4 sm:grid-cols-2">
       <div className="flex items-center gap-4 sm:col-span-2">
-        <Avatar m={{ name: d.name, photo: d.photo }} size={80} />
+        <Avatar m={{ name: d.name, photo: d.photo, photoUrl: d.photo ? null : fallbackUrl }} size={80} />
         <div className="flex flex-wrap gap-2">
           <button type="button" className="btn btn-navy btn-sm" disabled={uploading} onClick={() => fileRef.current?.click()}>
             {uploading ? "Uploading…" : d.photo ? "Change photo" : "Upload photo"}
@@ -197,7 +198,7 @@ export default function TeamManager({ members }: { members: TeamMember[] }) {
             {list.map((m, i) => (
               <li key={m.id} className="p-5">
                 {editing === m.id ? (
-                  <MemberForm id={m.id} initial={m} onDone={() => setEditing(null)} />
+                  <MemberForm id={m.id} initial={m} fallbackUrl={m.photoUrl} onDone={() => setEditing(null)} />
                 ) : (
                   <div className="flex flex-wrap items-center gap-4">
                     <div className="flex flex-col">

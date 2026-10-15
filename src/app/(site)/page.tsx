@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CapitalTarget, Pathway, SupportAndInvest } from "@/components/growth";
+import Photo from "@/components/Photo";
 import PostCard from "@/components/PostCard";
+import Recognition from "@/components/Recognition";
 import TeamGrid from "@/components/TeamGrid";
 import { SectionTitle } from "@/components/ui";
 import { CAPITAL_USES, CURRENT_STAGE, GOALS, INVEST_HREF } from "@/lib/content";
@@ -10,7 +12,7 @@ import { getSettings } from "@/lib/settings";
 import { getTeam } from "@/lib/team";
 
 const STEPS = [
-  { n: "01", title: "Water flows in", text: "Riverbox sits in a stream or channel with as little as 1–5 metres of head — no large dam required." },
+  { n: "01", title: "Water flows in", text: "Riverbox sits in a stream or channel with 1–10 metres of head — no large dam required." },
   { n: "02", title: "The turbine spins", text: "A locally engineered low-head turbine turns moving water into rotation, day and night." },
   { n: "03", title: "Power is delivered", text: "An integrated generator and control system supply electricity to nearby homes and enterprises." },
 ];
@@ -58,8 +60,11 @@ export default async function HomePage() {
 
       {/* About */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
-        <SectionTitle eyebrow="About" title="Energy access is still out of reach for too many"
-          intro="Electricity powers study after dark, safe clinics, cold storage and small businesses. Riverbox is designed to bring that power to communities beside Zambia's rivers." />
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <SectionTitle eyebrow="About" title="Energy access is still out of reach for too many"
+            intro="Electricity powers study after dark, safe clinics, cold storage and small businesses. Riverbox is designed to bring that power to communities beside Zambia's rivers." />
+          <Photo name="community" alt="A rural community beside a river in Zambia" />
+        </div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {PROBLEMS.map((p) => (
             <div key={p.title} className="rounded-2xl bg-cream-50 p-7 ring-1 ring-cream-200">
@@ -75,9 +80,12 @@ export default async function HomePage() {
       {/* Riverbox */}
       <section className="bg-navy-800 py-24 text-cream-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-water-300">Riverbox</p>
-            <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Simple to install. Built to be maintained locally.</h2>
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-water-300">Riverbox</p>
+              <h2 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Simple to install. Built to be maintained locally.</h2>
+            </div>
+            <Photo name="riverbox-prototype" alt="CAD render of the Riverbox crossflow turbine" />
           </div>
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {STEPS.map((s) => (
@@ -99,8 +107,14 @@ export default async function HomePage() {
           <p className="text-lg text-navy-700/85">{CURRENT_STAGE.summary}</p>
         </div>
         <div className="mt-10"><Pathway /></div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <Photo name="site-visit" alt="The Royal Flow team speaking with a community member during a site visit" caption="Community site visit" />
+          <Photo name="cfd-velocity" alt="CFD simulation of flow through the Riverbox turbine" caption="CFD-validated turbine design" />
+        </div>
         <Link href="/progress" className="mt-8 inline-block font-semibold text-gold-600 hover:text-gold-500">See current progress →</Link>
       </section>
+
+      <Recognition />
 
       {/* Impact */}
       <section className="bg-cream-50 py-20">
